@@ -1,0 +1,15 @@
+{
+  "name": "shrink-url",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/skarunakar/shrink-url.git",
+  "author": "Shreya Karunakar <shreyak0492@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.7"
+  }
+}

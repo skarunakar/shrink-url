@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/skarunakar/shrink-url.git",
-  "author": "Shreya Karunakar <shreyak0492@gmail.com>",
+  "author": "Shreya Karunakar",
   "license": "MIT",
   "scripts": {
-    "start": "node ./app.js"
+    "start": "node ./app.js",
+    "dev": "nodemon ./app.js"
   },
   "dependencies": {
+    "config": "^3.3.6",
     "express": "^4.17.1",
-    "mongoose": "^5.12.7"
+    "mongoose": "^5.12.7",
+    "shortid": "^2.2.16",
+    "valid-url": "^1.0.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }

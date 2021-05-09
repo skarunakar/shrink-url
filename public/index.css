@@ -1,0 +1,41 @@
+html {
+    margin: 0;
+    font-size: 10px;
+    background-color: #EDEDED;
+}
+header {
+    font-size: 3.2rem;
+    font-weight: 700;
+    text-align: center;
+    color:  #2281c2;
+}
+#content {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    align-items: center;
+}
+form {
+    margin: 1rem 0;
+}
+input {
+    height: 4.3rem;
+    border-radius: 0.3rem;
+    border-right: 0;
+    color: #000;
+    font-size: 1.4rem;
+    max-width: 100rem;
+    min-width: 32rem;
+}
+button {
+    height: 5rem;
+    width: 12.8rem;
+    background-color: #2281c2;
+    color: #fff;
+    font-weight:500;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+table {
+    border: 0.1rem solid #000;
+}

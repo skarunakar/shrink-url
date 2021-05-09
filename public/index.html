@@ -1,19 +1,47 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <link href='./index.js' type=''/>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#000000" />
+        <title>Shrink URL</title>
+        <!--
+            This webpage logo is taken from "compress-arrows-alt-solid" of font-awesome "https://fontawesome.com/"
+            Licence for the same can be found in this link "https://fontawesome.com/license"
+            If changes were made by original author similar changes will be made here in,
+            but not in any way that suggests the licensor endorses you or your use.
+        -->
+        <link rel="icon" href="./assets/images/logo.svg">
+        <link rel="stylesheet" href="index.css">
+        <script src="./index.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="./http.js"></script>
     </head>
     <body>
-        <div id='shorten-section'>
-            <input>
-            <button onclick='App.handleShrink()'>Shrink</button>
-        </div>
-        <div id='expand-section'>
-            <input>
-            <button onclick='App.handleExpand()'>Expand</button>
-        </div>
-        <div id='display-section'>
-            <input>
-            <button>Shrink</button>
-        </div>
+        <header>Shrink Url</header>
+        <main id='content'>
+            <form onsubmit='App.handleShrinkSubmit(event)' id='shorten-section'>
+                <input required type="url"
+                    name="longUrl" id="longUrl" 
+                    placeholder='Enter link here' 
+                    onchange='App.handleShrinkInputChange(event)'/>
+                <button id='button-shrink'>Shrink</button>
+            </form>
+            <form onsubmit='App.handleExpandSubmit(event)' id='expand-section' >
+                <input required type="url" 
+                    name="shortUrl" id="shortUrl" 
+                    placeholder='Enter link here' 
+                    onchange='App.handleExpandInputChange(event)'/>
+                <button id='button-expand' >Expand</button>
+            </form>
+            <div id='display-section'>
+                <table>
+                    <tr>
+                        <th>Long URL</th>
+                        <th>Short URL</th>
+                    </tr>
+                </table>
+            </div>
+        </main>
     </body>
 </html>

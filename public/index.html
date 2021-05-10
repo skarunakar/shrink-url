@@ -24,24 +24,19 @@
                 <input required type="url"
                     name="longUrl" id="longUrl" 
                     placeholder='Enter link here' 
-                    onchange='App.handleShrinkInputChange(event)'/>
+                    oninput='App.handleShrinkInputChange(event)'/>  
                 <button id='button-shrink'>Shrink</button>
+                <div id='shrink-error'></div>  
             </form>
             <form onsubmit='App.handleExpandSubmit(event)' id='expand-section' >
                 <input required type="url" 
                     name="shortUrl" id="shortUrl" 
                     placeholder='Enter link here' 
-                    onchange='App.handleExpandInputChange(event)'/>
+                    oninput='App.handleExpandInputChange(event)'/>
                 <button id='button-expand' >Expand</button>
+                <div id='expand-error'></div>   
             </form>
             <div id='display-section'>
-                <table>
-                    <tr>
-                        <th>Long URL</th>
-                        <th>Short URL</th>
-                    </tr>
-                </table>
-            </div>
         </main>
     </body>
 </html>

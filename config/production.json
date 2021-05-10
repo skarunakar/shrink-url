@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://test-user:TestPassword123@cluster0.fr7yj.mongodb.net/testDatabase?retryWrites=true&w=majority",
+    "baseUrl": "https://shrink-url-sk.herokuapp.com/"
+}

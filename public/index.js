@@ -14,13 +14,22 @@ const App = (function(){
                     const {shortUrl} = response.data;
                     buttonsState.shrink = 'copy';
                     buttonNode.innerHTML = 'Copy';
-                    buttonNode.style.backgroundColor = '#39e600';
+                    buttonNode.style.backgroundColor = '#b30059';
                     inputNode.value = shortUrl;
+                    App.renderRecords();
+                })
+                .catch((err) => {
+                    console.error(err.message);
+                    const errorNode =  document.getElementById('shrink-error');
+                    errorNode.innerHTML = 'Invalid Long Url';
                 });
             } else if(buttonsState.shrink === 'copy')  {
                 buttonNode.innerHTML = 'Copied';
                 buttonNode.style.backgroundColor = '#1a6600';
                 buttonsState.shrink = 'copied';
+                inputNode.select();
+                document.execCommand("copy");
+            } else {
                 inputNode.select();
                 document.execCommand("copy");
             }
@@ -55,8 +64,13 @@ const App = (function(){
                 .then((response) => {
                     const {longUrl} = response.data;
                     buttonNode.innerHTML = 'Copy';
-                    buttonNode.style.backgroundColor = '#39e600';
+                    buttonsState.expand = 'copy';
+                    buttonNode.style.backgroundColor = '#b30059';
                     inputNode.value = longUrl;
+                }).catch((err) => {
+                    console.error(err.message);
+                    const errorNode =  document.getElementById('expand-error');
+                    errorNode.innerHTML = 'Invalid Short Url';
                 })
             } else if(buttonsState.expand === 'copy')  {
                 buttonNode.style.backgroundColor = '#1a6600';
@@ -64,11 +78,52 @@ const App = (function(){
                 buttonsState.expand === 'copied';
                 inputNode.select();
                 document.execCommand("copy");
+            } else {
+                inputNode.select();
+                document.execCommand("copy");
             }
             event.preventDefault();
         },
+        constructTableHead: function(table) {
+            const tr = table.insertRow();
+            let th = tr.insertCell();
+            th.innerHTML = 'Long URL';
+            tr.appendChild(th);
+            th = tr.insertCell();
+            th.innerHTML = 'Short URL';
+            tr.appendChild(th);
+
+        },
+        constructTableBody: function(table, allRecords) {
+
+            for(let i =0; i< allRecords.length; i++) {
+                const tr = table.insertRow();
+                let td = tr.insertCell();
+                td.innerHTML = `<a href=${allRecords[i]?.longUrl} target="_blank">${allRecords[i]?.longUrl}</a>`;
+                tr.appendChild(td);
+                td = tr.insertCell();
+                td.innerHTML = `<a href=${allRecords[i]?.shortUrl} target="_blank">${allRecords[i]?.shortUrl}</a>`;
+                tr.appendChild(td);
+            }
+
+        },
         renderRecords: function() {
-            
+            const tableParent =  document.getElementById('display-section');
+            http.get('api/getRecords')
+            .then((response) => {
+                const allRecords = response?.data;
+                if(allRecords?.length) {
+                    const table = document.createElement('table');
+                    this.constructTableHead(table);
+                    this.constructTableBody(table, allRecords);
+                    tableParent.innerHTML = '';
+                    tableParent.appendChild(table);
+                }
+            });
         }
     }
 })();
+
+window.onload = function() {
+    App.renderRecords();
+};

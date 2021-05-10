@@ -3,9 +3,7 @@ const config = require('config');
 const db = config.get('mongoURI');
 const connectDB = async () => {
    try {
-    await mongoose.connect(db, {
-        newUserUrlParser: true
-    })
+    await mongoose.connect(db)
     console.log("Mongo DB connected");
    }
    catch(err) {

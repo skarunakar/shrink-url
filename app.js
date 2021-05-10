@@ -24,7 +24,7 @@ app.post('/api/shrink', async (req, res) => {
     const { longUrl } = req.body;
     const baseUrl = config.get('baseUrl'); 
     if(!validUrl.isUri(baseUrl)) {
-        return res.status(401).json('Invalid base url');
+        return res.status(400).json('Invalid base url');
     }
     const urlId = shortId.generate();
     if(validUrl.isUri(longUrl)) {
@@ -47,7 +47,7 @@ app.post('/api/shrink', async (req, res) => {
 
         }
     } else {
-        return res.status(401).json('Invalid URL');   
+        return res.status(400).json('Invalid URL');   
     }
 });
 
@@ -57,12 +57,12 @@ app.post('/api/expand', async (req, res) => {
     const { shortUrl } = req.body;
     const baseUrl = config.get('baseUrl'); 
     if(!validUrl.isUri(baseUrl)) {
-        return res.status(401).json('Invalid base url');
+        return res.status(400).json('Invalid base url');
     }
     try {
         let urlRecord = await Url.findOne({ shortUrl });
         if(urlRecord) return res.json(urlRecord);
-        return res.status(401).json('URL cannot be expanded'); 
+        return res.status(400).json('URL cannot be expanded'); 
     } catch (err) {
         console.error(err.message);
         return res.status(500).json('Internal server error');
@@ -73,9 +73,9 @@ app.post('/api/expand', async (req, res) => {
 // @desc redirect to long url
 app.get('/:shortUrl', async (req,res) => {
     try {
-        let urlRecord = await Url.findOne({urlCode: req.params.code});
+        let urlRecord = await Url.findOne({urlId: req.params.shortUrl});
         if(urlRecord) return res.redirect(urlRecord.longUrl);
-        return res.status(401).json('Invalid short url'); 
+        return res.status(400).json('Invalid short url'); 
     } catch (err) {
         console.error(err.message);
         return res.status(500).json('Internal server error');
